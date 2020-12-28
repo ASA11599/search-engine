@@ -9,3 +9,9 @@ services:
       - "80:80"
   api-server:
     build: ./api
+  web-crawler:
+    build: ./crawler
+    depends_on:
+      - api-server
+    environment:
+      - CRAWL_FOR=120
