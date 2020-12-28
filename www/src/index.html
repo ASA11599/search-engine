@@ -8,13 +8,21 @@
 <body>
     <h1>Hello World!</h1>
     <p>This is a simple search engine</p>
+    <input type="text" id="path_input">
+    <button id="btn">Search</button>
     <p id="res">API response not fetched</p>
     <script>
-        fetch("/api").then((value) => {
-            document.getElementById("res").innerText = value.body;
-        }).catch((reason) => {
-            document.getElementById("res").innerText = reason;
-        });
+        const res = document.getElementById("res");
+        document.getElementById("btn").onclick = (ev) => {
+            fetch(document.getElementById("path_input").value)
+            .then(response => response.json())
+            .then((json) => {
+                res.innerText = JSON.stringify(json)
+            })
+            .catch((reason) => {
+                res.innerText = reason;
+            });
+        };
     </script>
 </body>
 </html>
