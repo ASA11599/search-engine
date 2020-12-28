@@ -50,8 +50,8 @@ response:
 #### Infrastructure
 
 Create Docker image for the project that will include dependencies such as:
-- python3 (+ packages)
-- Nginx/Apache
-- PHP/Java (+ libraries)
+
+- python3
+- Nginx
+- Java
 - PostgreSQL
-- etc.

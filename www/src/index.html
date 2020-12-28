@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <p>This is a simple search engine</p>
+    <p id="res">API response not fetched</p>
+    <script>
+        fetch("/api").then((value) => {
+            document.getElementById("res").innerText = value.body;
+        }).catch((reason) => {
+            document.getElementById("res").innerText = reason;
+        });
+    </script>
+</body>
+</html>
