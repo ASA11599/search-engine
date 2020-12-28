@@ -43,15 +43,17 @@ response:
 
 #### Web
 
-- Run Apache/Nginx to serve a static page that has a search bar and a section for the results
+- Run Nginx to serve a static page that has a search bar and a section for the results
 - Perform API call using AJAX to get results based on the user's search query
 - Update the results section with titles and links to relevant pages
 
 #### Infrastructure
 
-Create Docker image for the project that will include dependencies such as:
+The project is made up of the following services:
 
-- python3
-- Nginx
-- Java
-- PostgreSQL
+- A web server for static pages, assets and redirects to the API
+- An API server that will handle all reads and writes to the database
+- A web crawler to look for pages on the web
+- A database to store pages found by the crawler
+
+Each of these services will run in a Docker container with all is dependencies.
