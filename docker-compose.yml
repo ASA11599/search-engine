@@ -20,5 +20,5 @@ services:
       - START_AT=https://www.python.org/
   db-server:
     build: ./database
-    environment:
-      - POSTGRES_PASSWORD=admin
+    env_file:
+      - ./database/db.env
