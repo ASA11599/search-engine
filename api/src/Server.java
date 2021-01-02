@@ -40,7 +40,7 @@ public class Server {
 
     public static void serve() {
         try {
-            HttpServer server = HttpServer.create(new InetSocketAddress(InetAddress.getByName("192.168.64.12"), 8080), 0);
+            HttpServer server = HttpServer.create(new InetSocketAddress(InetAddress.getByName("0.0.0.0"), 80), 0);
             server.createContext("/", new MyHandler());
             server.setExecutor(null);
             server.start();
