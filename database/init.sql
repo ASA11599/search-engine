@@ -1,7 +1,18 @@
-CREATE TABLE Index (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR NOT NULL,
-    link VARCHAR NOT NULL
+CREATE TYPE UserRole AS ENUM ('admin', 'basic');
+
+CREATE TABLE Users (
+    ID SERIAL PRIMARY KEY,
+    Username VARCHAR UNIQUE NOT NULL,
+    PasswordHash VARCHAR NOT NULL,
+    AccountRole UserRole NOT NULL
 );
 
-INSERT INTO Index (title, link) VALUES ('Google', 'https://www.google.com'), ('Wikipedia', 'https://www.wikipedia.org');
+INSERT INTO Users (Username, PasswordHash, AccountRole) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin');
+
+CREATE TABLE Index (
+    ID SERIAL PRIMARY KEY,
+    Title VARCHAR NOT NULL,
+    Link VARCHAR NOT NULL
+);
+
+INSERT INTO Index (Title, Link) VALUES ('Google', 'https://www.google.com'), ('Wikipedia', 'https://www.wikipedia.org');
