@@ -9,6 +9,8 @@ services:
       - "80:80"
   api-server:
     build: ./api
+    depends_on:
+      - db-server
   web-crawler:
     build: ./crawler
     depends_on:
@@ -16,3 +18,7 @@ services:
     environment:
       - CRAWL_FOR=120
       - START_AT=https://www.python.org/
+  db-server:
+    build: ./database
+    environment:
+      - POSTGRES_PASSWORD=admin
