@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.AuthenticationException;
+
 public class IndexDAO extends BaseDAO {
 
     public IndexDAO(String dbHost, String dbUser, String dbPassword, String dbName) {
@@ -35,19 +37,25 @@ public class IndexDAO extends BaseDAO {
         return (pages.toArray(pagesArray));
     }
 
-    public boolean addPage(WebPage newPage, User user) throws SQLException {
-        UserDAO userDAO = new UserDAO(this.dbHost, this.dbHost, this.dbHost, this.dbHost);
-        if (userDAO.authenticateUser(user)) {
-            try {
-                Statement s = this.dbConnection.createStatement();
-                boolean success = s.execute("INSERT INTO Index (Title, Link) VALUES ('" + newPage.getTitle() + "', " + "'" + newPage.getLink() + "')");
-                s.close();
-                return success;
-            } catch (SQLException sqle) {
-                throw sqle;
+    public boolean addPage(WebPage newPage, User user) throws SQLException, AuthenticationException {
+        UserDAO userDAO = new UserDAO(this.dbHost, this.dbUser, this.dbPassword, this.dbName);
+        try {
+            if (userDAO.authenticateUser(user)) {
+                try {
+                    Statement s = this.dbConnection.createStatement();
+                    boolean success = s.execute("INSERT INTO Index (Title, Link) VALUES ('" + newPage.getTitle() + "', " + "'" + newPage.getLink() + "')");
+                    s.close();
+                    return success;
+                } catch (SQLException sqle) {
+                    throw sqle;
+                }
+            } else {
+                throw new AuthenticationException();
             }
-        } else {
-            return false;
+        } catch (SQLException sqle) {
+            throw sqle;
+        } finally {
+            userDAO.close();
         }
     }
 

@@ -2,19 +2,12 @@ package src.models;
 
 public class User {
 
-    public enum Role {
-        ADMIN,
-        BASIC
-    }
-
     private String username;
     private String passwordHash;
-    private Role role;
 
-    public User(String username, String passwordHash, Role role) {
+    public User(String username, String passwordHash) {
         this.username = username;
         this.passwordHash = passwordHash;
-        this.role = role;
     }
 
     public String getUsername() {
@@ -23,10 +16,6 @@ public class User {
 
     public String getPasswordHash() {
         return this.passwordHash;
-    }
-
-    public Role getRole() {
-        return this.role;
     }
 
 }
