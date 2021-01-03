@@ -6,6 +6,7 @@ import src.models.WebPage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class IndexDAO extends BaseDAO {
         super(dbHost, dbUser, dbPassword, dbName);
     }
 
-    public WebPage[] getPages(String titleSubstring) {
+    public WebPage[] getPages(String titleSubstring) throws SQLException {
         List<WebPage> pages = new ArrayList<WebPage>();
         try {
             Statement s = this.dbConnection.createStatement();
@@ -28,7 +29,7 @@ public class IndexDAO extends BaseDAO {
             rs.close();
             s.close();
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            throw sqle;
         }
         WebPage[] pagesArray = new WebPage[pages.size()];
         return (pages.toArray(pagesArray));
