@@ -1,13 +1,10 @@
-CREATE TYPE UserRole AS ENUM ('admin', 'basic');
-
-CREATE TABLE Users (
+CREATE TABLE Administrators (
     ID SERIAL PRIMARY KEY,
     Username VARCHAR UNIQUE NOT NULL,
-    PasswordHash VARCHAR NOT NULL,
-    AccountRole UserRole NOT NULL
+    PasswordHash VARCHAR NOT NULL
 );
 
-INSERT INTO Users (Username, PasswordHash, AccountRole) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 'admin');
+INSERT INTO Administrators (Username, PasswordHash) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3');
 
 CREATE TABLE Index (
     ID SERIAL PRIMARY KEY,
