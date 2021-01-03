@@ -19,6 +19,7 @@ import com.sun.net.httpserver.HttpServer;
 public class Server {
 
     private static Map<String, Endpoint> routes = new HashMap<String, Endpoint>();
+
     static {
         routes.put("/search", new SearchEndpoint());
         routes.put("/index", new IndexEndpoint());

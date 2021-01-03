@@ -56,10 +56,14 @@ public class SearchEndpoint extends Endpoint {
             } catch (UnsupportedEncodingException uee) {
                 this.finish(t, 500, "{\"error\": \"Unable to decode search query\"}");
             } catch (Exception e) {
+                this.finish(t, 500, "{\"error\": \"An unexpected error occurred\"}");
                 e.printStackTrace();
+            } finally {
+                indexDAO.close();
             }
         } else {
             this.finish(t, 400, "{\"error\": \"Search query missing\"}");
+            indexDAO.close();
         }
     }
 

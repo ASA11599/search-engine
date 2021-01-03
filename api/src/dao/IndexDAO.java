@@ -35,11 +35,17 @@ public class IndexDAO extends BaseDAO {
         return (pages.toArray(pagesArray));
     }
 
-    public boolean addPage(WebPage newPage, User user) {
+    public boolean addPage(WebPage newPage, User user) throws SQLException {
         UserDAO userDAO = new UserDAO(this.dbHost, this.dbHost, this.dbHost, this.dbHost);
         if (userDAO.authenticateUser(user)) {
-            // TODO: add a page
-            return false;
+            try {
+                Statement s = this.dbConnection.createStatement();
+                boolean success = s.execute("INSERT INTO Index (Title, Link) VALUES ('" + newPage.getTitle() + "', " + "'" + newPage.getLink() + "')");
+                s.close();
+                return success;
+            } catch (SQLException sqle) {
+                throw sqle;
+            }
         } else {
             return false;
         }

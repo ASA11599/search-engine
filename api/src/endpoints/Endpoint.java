@@ -19,8 +19,8 @@ public class Endpoint {
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());
             os.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
         }
     }
 
