@@ -15,4 +15,10 @@ CREATE TABLE Index (
     Link VARCHAR NOT NULL
 );
 
-INSERT INTO Index (Title, Link) VALUES ('Google', 'https://www.google.com'), ('Wikipedia', 'https://www.wikipedia.org');
+INSERT INTO Index (Title, Link)
+VALUES
+('Google', 'https://www.google.com'),
+('Wikipedia', 'https://www.wikipedia.org'),
+('Welcome to Python.org', 'https://www.python.org'),
+('Facebook - Log In or Sign Up', 'https://www.facebook.com'),
+('YouTube', 'https://www.youtube.com/');
