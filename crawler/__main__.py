@@ -32,6 +32,7 @@ class MyHTMLParser(hp.HTMLParser):
                     print("Found link to: " + str(attr_t[1]))
 
 def main():
+    return
     if not (("CRAWL_FOR" in os.environ.keys()) and ("START_AT" in os.environ.keys())):
         print("Error: CRAWL_FOR or START_AT environment variables are missing")
     else:
