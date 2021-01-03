@@ -15,9 +15,8 @@ services:
     build: ./crawler
     depends_on:
       - api-server
-    environment:
-      - CRAWL_FOR=120
-      - START_AT=https://www.python.org/
+    env_file:
+      - ./crawler/crawler.env
   db-server:
     build: ./database
     env_file:
