@@ -15,7 +15,7 @@ import src.models.WebPage;
 public class IndexEndpoint extends Endpoint {
 
     private static String hashPassword(String password) {
-        // TODO: Use MD5 to hash the given password
+        // TODO: use MD5 to hash the given password
         return "21232f297a57a5a743894a0e4a801fc3";
     }
 

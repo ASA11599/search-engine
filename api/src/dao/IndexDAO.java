@@ -43,9 +43,9 @@ public class IndexDAO extends BaseDAO {
             if (userDAO.authenticateUser(user)) {
                 try {
                     Statement s = this.dbConnection.createStatement();
-                    boolean success = s.execute("INSERT INTO Index (Title, Link) VALUES ('" + newPage.getTitle() + "', " + "'" + newPage.getLink() + "')");
+                    s.executeUpdate("INSERT INTO Index (Title, Link) VALUES ('" + newPage.getTitle() + "', " + "'" + newPage.getLink() + "')");
                     s.close();
-                    return success;
+                    return true;
                 } catch (SQLException sqle) {
                     throw sqle;
                 }
