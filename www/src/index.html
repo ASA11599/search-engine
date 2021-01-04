@@ -4,33 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Engine</title>
+    <script defer src="/main.js"></script>
 </head>
 <body>
     <h1>Hello World!</h1>
     <p>This is a simple search engine</p>
-    <input type="text" id="path_input">
+    <input type="text" id="query">
     <button id="btn">Search</button>
     <br>
     <p id="res"></p>
-    <script>
-        const res = document.getElementById("res");
-        document.getElementById("btn").onclick = (ev) => {
-            fetch("/api/search?q=" + encodeURIComponent(document.getElementById("path_input").value))
-            .then(response => response.json())
-            .then((json) => {
-                document.getElementById("res").innerHTML = "";
-                for (item of json) {
-                    let newElement = document.createElement("a");
-                    newElement.setAttribute("href", item["link"]);
-                    newElement.innerText = item["title"];
-                    document.getElementById("res").appendChild(newElement);
-                    document.getElementById("res").appendChild(document.createElement("br"));
-                }
-            })
-            .catch((reason) => {
-                res.innerText = reason;
-            });
-        };
-    </script>
 </body>
 </html>
