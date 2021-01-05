@@ -31,6 +31,8 @@ public class UserDAO extends BaseDAO {
             }
         } catch (SQLException sqle) {
             throw sqle;
+        } catch (NullPointerException npe) {
+            return false;
         }
     }
 
