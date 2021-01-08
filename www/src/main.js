@@ -1,6 +1,6 @@
 const res = document.getElementById("res");
 document.getElementById("btn").onclick = (_ev) => {
-    fetch("/api/search?q=" + encodeURIComponent(document.getElementById("query").value))
+    fetch("/api/index?q=" + encodeURIComponent(document.getElementById("query").value))
     .then(response => response.json())
     .then((json) => {
         document.getElementById("res").innerHTML = "";
