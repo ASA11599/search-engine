@@ -24,19 +24,19 @@ Use a simple schema like the following:
 
 Create an API to return a list of pages from a query like such:
 
-`GET /api/search?q=Search%20Engine`
+`GET /api/index?q=Search%20Engine`
 
 response:
 
 ```json
 [
   {
-        "title": "How Search Engines Work: Crawling, Indexing, and Ranking | Beginner&#039;s Guide to SEO - Moz",
-        "url": "https://moz.com/beginners-guide-to-seo/how-search-engines-operate"
+        "Title": "How Search Engines Work: Crawling, Indexing, and Ranking | Beginner&#039;s Guide to SEO - Moz",
+        "Link": "https://moz.com/beginners-guide-to-seo/how-search-engines-operate"
   },
   {
-        "title": "Web search engine - Wikipedia",
-        "url": "https://en.wikipedia.org/wiki/Web_search_engine"
+        "Title": "Web search engine - Wikipedia",
+        "Link": "https://en.wikipedia.org/wiki/Web_search_engine"
   }
 ]
 ```
