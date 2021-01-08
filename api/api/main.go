@@ -27,19 +27,24 @@ func main() {
 			rw.Header().Set("Content-Type", "application/json")
 			if r.Method == http.MethodGet {
 				q := r.URL.Query().Get("q")
-				pages, err := models.Query(q)
-				if err != nil {
-					rw.WriteHeader(http.StatusInternalServerError)
-					rw.Write([]byte("{\"error\": \"Unable to query the index\", \"message\": \"" + err.Error() + "\"}"))
-				} else {
-					pagesJson, err := json.Marshal(pages)
+				if strings.TrimSpace(q) != "" {
+					pages, err := models.Query(q)
 					if err != nil {
 						rw.WriteHeader(http.StatusInternalServerError)
-						rw.Write([]byte("{\"error\": \"Internal server error\", \"message\": \"" + err.Error() + "\"}"))
+						rw.Write([]byte("{\"error\": \"Unable to query the index\", \"message\": \"" + err.Error() + "\"}"))
 					} else {
-						rw.WriteHeader(http.StatusOK)
-						rw.Write(pagesJson)
+						pagesJson, err := json.Marshal(pages)
+						if err != nil {
+							rw.WriteHeader(http.StatusInternalServerError)
+							rw.Write([]byte("{\"error\": \"Internal server error\", \"message\": \"" + err.Error() + "\"}"))
+						} else {
+							rw.WriteHeader(http.StatusOK)
+							rw.Write(pagesJson)
+						}
 					}
+				} else {
+					rw.WriteHeader(http.StatusBadRequest)
+					rw.Write([]byte("{\"error\": \"Query cannot be empty\"}"))
 				}
 			} else if r.Method == http.MethodPost {
 				contentType := r.Header.Get("Content-Type")
