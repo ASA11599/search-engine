@@ -17,26 +17,21 @@ func newWebPage(title string, link string) *WebPage {
 }
 
 func WebPageFromJSON(jsonString string) (*WebPage, error) {
-	m := make(map[string]string)
-	err := json.Unmarshal([]byte(jsonString), &m)
+	wp := new(WebPage)
+	err := json.Unmarshal([]byte(jsonString), wp)
 	if err != nil {
 		return nil, err
 	} else {
-		title, hasTitle := m["title"]
-		link, hasLink := m["link"]
-		if hasTitle && hasLink {
-			return newWebPage(title, link), nil
+		if (wp.Title == "") || (wp.Link == "") {
+			return nil, errors.New("Information missing from JSON, needs title and link")
 		} else {
-			return nil, errors.New("JSON string is missing information")
+			return wp, nil
 		}
 	}
 }
 
 func (this *WebPage) ToJSON() (string, error) {
-	m := make(map[string]string)
-	m["title"] = this.Title
-	m["link"] = this.Link
-	bytes, err := json.Marshal(&m)
+	bytes, err := json.Marshal(this)
 	return string(bytes), err
 }
 
