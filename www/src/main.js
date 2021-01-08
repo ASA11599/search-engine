@@ -6,8 +6,8 @@ document.getElementById("btn").onclick = (_ev) => {
         document.getElementById("res").innerHTML = "";
         for (item of json) {
             let newElement = document.createElement("a");
-            newElement.setAttribute("href", item["link"]);
-            newElement.innerText = item["title"];
+            newElement.setAttribute("href", item["Link"]);
+            newElement.innerText = item["Title"];
             document.getElementById("res").appendChild(newElement);
             document.getElementById("res").appendChild(document.createElement("br"));
         }
