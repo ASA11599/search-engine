@@ -7,6 +7,7 @@ import html.parser as hp
 from queue import Queue
 import re
 import time
+import json
 
 url_regex = re.compile(
                 r'^(?:http|ftp)s?://'
@@ -26,15 +27,25 @@ class MyHTMLParser(hp.HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         for attr_t in attrs:
-            if attr_t[0] == 'href':
+            if attr_t[0] == "href":
                 if is_url(attr_t[1]):
                     MyHTMLParser.q.put(attr_t[1])
-                    print("Found link to: " + str(attr_t[1]))
+                    link = str(attr_t[1])
+
+def add_page_to_index(title: str, link: str) -> bool:
+    res: rqs.Response = rqs.post(
+                            "http://api-server/index",
+                            headers={"Content-type": "application/json", "Authorization": "Basic YWRtaW46YWRtaW4="},
+                            json=json.dumps({"title": title, "link": link})
+                        )
+    # Verify that the resource was created
+    return res.status_code == 201
 
 def main():
     while True:
         pass
     return
+    # TODO: grab multiple pages from $START_AT and crawl on multiple threads
     if not (("CRAWL_FOR" in os.environ.keys()) and ("START_AT" in os.environ.keys())):
         print("Error: CRAWL_FOR or START_AT environment variables are missing")
     else:
