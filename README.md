@@ -16,7 +16,7 @@ A basic search engine
 
 Use a simple schema like the following:
 
-| ID       | Title  | URL                    |
+| ID       | Title  | Link                   |
 |----------|--------|------------------------|
 | 74392724 | Google | https://www.google.com |
 | 74392725 | Amazon | https://www.amazon.ca  |
