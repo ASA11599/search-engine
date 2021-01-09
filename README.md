@@ -4,6 +4,8 @@ A basic search engine
 
 ## Design
 
+![design] (https://raw.githubusercontent.com/ASA11599/search-engine/master/search-engine_design.png "Design")
+
 #### Web crawler
 
 - Web crawler will parse a web page and add all of its links to a queue
