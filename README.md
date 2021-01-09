@@ -4,7 +4,7 @@ A basic search engine
 
 ## Design
 
-![design] (https://raw.githubusercontent.com/ASA11599/search-engine/master/search-engine_design.png "Design")
+![design](https://raw.githubusercontent.com/ASA11599/search-engine/master/search-engine_design.png "Design")
 
 #### Web crawler
 
