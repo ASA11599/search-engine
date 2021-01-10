@@ -15,9 +15,10 @@ services:
     build: ./crawler
     depends_on:
       - api-server
-    env_file:
-      - ./crawler/crawler.env
+    environment:
+      - CRAWL_FOR=120
+      - START_AT=https://www.wikipedia.org/
   db-server:
     build: ./database
-    env_file:
-      - ./database/db.env
+    environment:
+      - POSTGRES_PASSWORD=admin
