@@ -41,6 +41,7 @@ func Query(q string) ([]WebPage, error) {
 		return nil, err
 	} else {
 		defer db.Close()
+		// TODO: sanitize input (this is vulnerabel to SQL injection !!!)
 		rows, err := db.Query("SELECT Title, Link FROM Index WHERE Title LIKE '%" + q + "%';")
 		if err != nil {
 			return nil, err
@@ -62,6 +63,7 @@ func (this *WebPage) AddToIndex() error {
 		return err
 	} else {
 		defer db.Close()
+		// TODO: sanitize input (this is vulnerabel to SQL injection !!!)
 		_, err := db.Exec("INSERT INTO Index (title, link) VALUES ('" + this.Title + "', '" + this.Link + "')")
 		if err != nil {
 			return err

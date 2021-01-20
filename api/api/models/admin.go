@@ -48,6 +48,7 @@ func (this *Admin) Authenticate() (bool, error) {
 		return false, err
 	} else {
 		defer db.Close()
+		// TODO: sanitize input (this is vulnerabel to SQL injection !!!)
 		rows, err := db.Query("SELECT PasswordHash FROM Administrators WHERE Username='" + this.Username + "';")
 		if err != nil {
 			return false, err
