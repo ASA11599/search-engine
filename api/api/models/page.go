@@ -41,7 +41,7 @@ func Query(q string) ([]WebPage, error) {
 		return nil, err
 	} else {
 		defer db.Close()
-		// TODO: sanitize input (this is vulnerabel to SQL injection !!!)
+		// TODO: sanitize input (this is vulnerable to SQL injection !!!)
 		rows, err := db.Query("SELECT Title, Link FROM Index WHERE Title LIKE '%" + q + "%';")
 		if err != nil {
 			return nil, err
