@@ -1,7 +1,7 @@
 package main
 
 import (
-	"api/models"
+	"api/dao"
 	"database/sql"
 	"encoding/json"
 	"io/ioutil"
@@ -28,7 +28,7 @@ func main() {
 			if r.Method == http.MethodGet {
 				q := r.URL.Query().Get("q")
 				if strings.TrimSpace(q) != "" {
-					pages, err := models.Query(q)
+					pages, err := dao.Query(q)
 					if err != nil {
 						rw.WriteHeader(http.StatusInternalServerError)
 						rw.Write([]byte("{\"error\": \"Unable to query the index\", \"message\": \"" + err.Error() + "\"}"))
@@ -57,7 +57,7 @@ func main() {
 						rw.WriteHeader(http.StatusUnauthorized)
 						rw.Write([]byte("{\"error\": \"Unauthorized\"}"))
 					} else {
-						admin, err := models.AdminFromBase64String(auth[1])
+						admin, err := dao.AdminFromBase64String(auth[1])
 						if err != nil {
 							rw.WriteHeader(http.StatusBadRequest)
 							rw.Write([]byte("{\"error\": \"Unable to decode credentials\", \"message\": \"" + err.Error() + "\"}"))
@@ -73,7 +73,7 @@ func main() {
 										rw.WriteHeader(http.StatusInternalServerError)
 										rw.Write([]byte("{\"error\": \"Unable to read request body\", \"message\": \"" + err.Error() + "\"}"))
 									} else {
-										webPage, err := models.WebPageFromJSON(string(bytes))
+										webPage, err := dao.WebPageFromJSON(string(bytes))
 										if err != nil {
 											rw.WriteHeader(http.StatusBadRequest)
 											rw.Write([]byte("{\"error\": \"Unable to parse request body\", \"message\": \"" + err.Error() + "\"}"))
