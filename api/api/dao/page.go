@@ -1,4 +1,4 @@
-package models
+package dao
 
 import (
 	"database/sql"
@@ -41,8 +41,7 @@ func Query(q string) ([]WebPage, error) {
 		return nil, err
 	} else {
 		defer db.Close()
-		// TODO: sanitize input (this is vulnerable to SQL injection !!!)
-		rows, err := db.Query("SELECT Title, Link FROM Index WHERE Title LIKE '%" + q + "%';")
+		rows, err := db.Query("SELECT Title, Link FROM Index WHERE Title LIKE $1;", "%" + q + "%")
 		if err != nil {
 			return nil, err
 		} else {
@@ -63,8 +62,7 @@ func (this *WebPage) AddToIndex() error {
 		return err
 	} else {
 		defer db.Close()
-		// TODO: sanitize input (this is vulnerabel to SQL injection !!!)
-		_, err := db.Exec("INSERT INTO Index (title, link) VALUES ('" + this.Title + "', '" + this.Link + "')")
+		_, err := db.Exec("INSERT INTO Index (title, link) VALUES ($1, $2)", this.Title, this.Link)
 		if err != nil {
 			return err
 		} else {

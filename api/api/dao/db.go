@@ -1,4 +1,4 @@
-package models
+package dao
 
 const (
 	dbhost = "db-server"
